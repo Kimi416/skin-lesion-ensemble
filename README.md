@@ -49,7 +49,7 @@
 
 ```bash
 # リポジトリのクローン
-git clone https://github.com/YOUR_USERNAME/skin-lesion-ensemble.git
+git clone https://github.com/Kimi416/skin-lesion-ensemble.git
 cd skin-lesion-ensemble
 
 # 仮想環境の作成（推奨）
@@ -62,18 +62,28 @@ pip install -r requirements.txt
 
 ### 2. モデルファイルのダウンロード
 
-モデルファイル（約6.4GB）は容量が大きいため、別途ダウンロードが必要です。
+モデルファイル（約6.4GB）はHugging Faceからダウンロードしてください。
+
+**Hugging Face**: https://huggingface.co/kindai-derma-ai/skin-lesion-ensemble
 
 ```bash
-# models/ フォルダにダウンロードしたモデルを配置
+# 方法1: huggingface_hubを使用（推奨）
+pip install huggingface_hub
+python -c "from huggingface_hub import snapshot_download; snapshot_download('kindai-derma-ai/skin-lesion-ensemble', local_dir='models')"
+
+# 方法2: Git LFSを使用
+git lfs install
+git clone https://huggingface.co/kindai-derma-ai/skin-lesion-ensemble models
+```
+
+ダウンロード後のフォルダ構成：
+```
 models/
 ├── efficientnet_b4_ham10k/      # EfficientNet-B4 (HAM10000) × 5
 ├── efficientnet_b7_imagenet/    # EfficientNet-B7 × 5
 ├── transformers/                 # ViT × 5, Swin × 5
 └── binary_classifiers/          # Binary classifiers × 15
 ```
-
-**ダウンロードリンク**: [Google Drive / 研究室共有フォルダ]
 
 ## 使用方法
 
@@ -139,9 +149,9 @@ python scripts/quick_gradcam.py --image path/to/image.jpg --output gradcam_resul
 ```bibtex
 @misc{skin_lesion_ensemble_2024,
   title={7-Model Ensemble for 8-Class Skin Lesion Classification},
-  author={Your Name},
+  author={Kindai Derma AI Lab},
   year={2024},
-  url={https://github.com/YOUR_USERNAME/skin-lesion-ensemble}
+  url={https://github.com/Kimi416/skin-lesion-ensemble}
 }
 ```
 
